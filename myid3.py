@@ -21,10 +21,10 @@ class DecisionTree:
             print("Loading from file object.")
             self.tree = pickle.load(load_from)
 
-def Entropy(self, y):
-    unique_elements, unique_count = np.unique(y, return_counts = True)
-    entropy=np.sum([(-unique_count[i]/np.sum(unique_count))*np.log2(unique_count[i]/np.sum(unique_count))for i in range(len(unique_elements))])
-    return entropy
+    def Entropy(self, y):
+        unique_elements, unique_count = np.unique(y, return_counts = True)
+        entropy=np.sum([(-unique_count[i]/np.sum(unique_count))*np.log2(unique_count[i]/np.sum(unique_count))for i in range(len(unique_elements))])
+        return entropy
     
     def Information_Gain(self, X, y, attribute):
         Total_entropy = self.Entropy(y)
@@ -84,17 +84,17 @@ def Entropy(self, y):
                 else:
                     return result
 
-def test(self, X, y, display=False):
-    # Returns a dictionary containing test statistics:
-    # accuracy, recall, precision, F1-measure, and a confusion matrix.
-    # If display=True, print the information to the console.
-    # Raise a ValueError if the class is not trained.
-    Y = pd.concat([y,X], axis=1)
-    x = list(X)
-    X = X.copy()
-    for i in range(len(x)):
-        z = x[i]
-        X[z] = X[z].astype('float')
+    def test(self, X, y, display=False):
+        # Returns a dictionary containing test statistics:
+        # accuracy, recall, precision, F1-measure, and a confusion matrix.
+        # If display=True, print the information to the console.
+        # Raise a ValueError if the class is not trained.
+        Y = pd.concat([y,X], axis=1)
+        x = list(X)
+        X = X.copy()
+        for i in range(len(x)):
+            z = x[i]
+            X[z] = X[z].astype('float')
         queries = X.to_dict(orient="records")
         predicted = pd.DataFrame(columns=["predicted"])
         y_true = Y["class"].values
@@ -107,26 +107,26 @@ def test(self, X, y, display=False):
         F1 = f1_score(y_true,y_pred, average='weighted')
         confusionmatrix = confusion_matrix(y_true, y_pred, labels=['B', 'L', 'R'])
         result = {'precision':precision,
-            'recall':recall,
+                'recall':recall,
                 'accuracy':accuracy,
-                    'F1':F1,
-                        'confusionmatrix':confusion_matrix}
+                'F1':F1,
+                'confusionmatrix':confusion_matrix}
         if display:
             print(result)
         
-                return result
+        return result
 
-def __str__(self):
-    # Returns a readable string representation of the trained
-    # decision tree or "ID3 untrained" if the model is not trained.
-    try:
-        return str(self.tree)
+    def __str__(self):
+        # Returns a readable string representation of the trained
+        # decision tree or "ID3 untrained" if the model is not trained.
+        try:
+            return str(self.tree)
         except:
             return "ID3 untrained"
                 
-                def save(self, output):
-                    # 'output' is a file *object* (NOT necessarily a filename)
-# to which you will save the model in a manner that it can be
-# loaded into a new DecisionTree instance.
-pickle.dump(self.tree, output)
-output.close()
+    def save(self, output):
+        # 'output' is a file *object* (NOT necessarily a filename)
+        # to which you will save the model in a manner that it can be
+        # loaded into a new DecisionTree instance.
+        pickle.dump(self.tree, output)
+        output.close()

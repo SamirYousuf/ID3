@@ -20,7 +20,6 @@ y = balancedata["class"]
 X = balancedata[balancedata.columns[1:]]
 
 trainlen = int(len(X)*0.8)
-
 train_X = X[:trainlen]
 test_X = X[trainlen:]
 train_y = y[:trainlen]
